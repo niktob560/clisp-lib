@@ -8,8 +8,7 @@ STANDART=c99
 OPTIMIZE=-Og
 TARGET=main
 
-C_SOURCES= \
-$(SRC_DIR)/main.c
+C_SOURCES=$(wildcard $(SRC_DIR)/*.c)
 
 C_INCLUDES= \
 -I$(INC_DIR)/
@@ -28,11 +27,11 @@ TOBJECTS = $(filter-out $(BUILD_DIR)/$(TARGET).o,$(OBJECTS))
 all: $(TARGET) Dir
 
 $(TARGET): $(OBJECTS) Makefile
-	@echo -e '\033[1;32mCC\t'$(OBJECTS)' '$@'\033[0m'
+	@echo -e '\033[0;32mCC\t'$(OBJECTS)' '$@'\033[0m'
 	@$(CC) $(OBJECTS) $(LDFLAGS) $(LIBS) -o $@
 
 $(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR)
-	@echo -e '\033[1;32mCC\t'$<'\033[0m'
+	@echo -e '\033[0;32mCC\t'$<'\033[0m'
 	@$(CC) -c $(CFLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.c=.lst)) $< -o $@
 
 
@@ -51,5 +50,6 @@ Dir: BuildDir SrcDir IncDir
 
 clean:
 	@rm -rf $(BUILD_DIR)/*
+	@rm $(TARGET)
 	@echo -e '\033[0;31mCleaned\033[0m'
 
