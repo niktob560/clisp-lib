@@ -3,6 +3,6 @@
 
 int main()
 {
-    printf("Hello, (((lisp)))!");
+    printf("Hello, (((lisp)))!\n");
     return 0;
 }
