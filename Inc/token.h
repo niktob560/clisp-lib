@@ -1,0 +1,4 @@
+enum 
+{
+    OpenBracket, CloseBracket, Atom
+};
